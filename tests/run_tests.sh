@@ -6,7 +6,7 @@ export NODE_VERSION=${NODE_VERSION:-4.8.6}
 
 bash ./build_it.sh
 
-#bash ./test_meteor_app.sh
+bash ./test_meteor_app.sh
 #bash ./test_meteor_app_with_devbuild.sh
 
 # I don't believe it's possible for this test to work right now.

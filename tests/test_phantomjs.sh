@@ -12,7 +12,7 @@ clean
 docker run  \
     --name phantomjs_check \
     --entrypoint="/bin/bash" \
-    "koenlav/meteord:node-${NODE_VERSION}-base" -c 'phantomjs -h'
+    "abernix/meteord:node-${NODE_VERSION}-base" -c 'phantomjs -h'
 
 sleep 5
 

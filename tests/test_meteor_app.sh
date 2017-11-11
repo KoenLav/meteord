@@ -15,7 +15,7 @@ clean
 
 meteor create --release 1.6 hello
 cd hello
-echo "FROM koenlav/meteord:node-${NODE_VERSION}-base" > Dockerfile
+echo "FROM koenlav/meteord:node-${NODE_VERSION}-onbuild" > Dockerfile
 
 docker build -t meteor-app-image ./
 docker run -d \

@@ -13,9 +13,9 @@ function clean() {
 cd /tmp
 clean
 
-meteor create --release 1.5.4-rc.0 hello
+meteor create --release 1.5.4 hello
 cd hello
-echo "FROM abernix/meteord:node-${NODE_VERSION}-devbuild" > Dockerfile
+echo "FROM koenlav/meteord:node-${NODE_VERSION}-devbuild" > Dockerfile
 
 docker build -t meteor-app-image ./
 docker run -d \

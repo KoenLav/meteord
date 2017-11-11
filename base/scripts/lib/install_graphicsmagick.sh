@@ -1,1 +1,1 @@
-apt-get -y graphicsmagick
+apt-get install -y graphicsmagick

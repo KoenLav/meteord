@@ -47,4 +47,4 @@ fi
 export PORT=${PORT:-80}
 
 echo "=> Starting meteor app on port:$PORT"
-node main.js
+node --prof main.js

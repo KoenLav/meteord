@@ -4,7 +4,7 @@ machine:
   services:
     - docker
   environment:
-    NODE_VERSION: 8.9.4
+    NODE_VERSION: 8.9.5
 
 dependencies:
   pre:

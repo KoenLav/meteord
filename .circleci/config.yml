@@ -1,33 +1,33 @@
-machine:
-  node:
-    version: 8.12.0
-  services:
-    - docker
-  environment:
-    NODE_VERSION: 8.12.0
+version: 2
+jobs:
 
-dependencies:
-  pre:
-    - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-    - sudo apt-get update
-    - sudo apt-get install -y libstdc++-4.9-dev
-  override:
-    - if [ ! -f $HOME/.meteor/meteor ]; then curl https://install.meteor.com | sh; fi
-    - sudo ln -s $HOME/.meteor/meteor /usr/bin/meteor
-  cache_directories:
-    - ../.meteor
-
-test:
-  override:
-    - cd tests && bash run_tests.sh
+# cache_directories:
+#   - ../.meteor
 
 deployment:
   docker:
-    branch: /^node-[0-9.]+$/
-    commands:
-      - docker images
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - |
+    - image: circleci/node:8.12.0-browsers
+    - branch: /^node-[0-9.]+$/
+  environment:
+    NODE_VERSION: 8.12.0
+  steps:
+    - checkout
+    - run:
+      name: Dependencies
+      command: |
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+        sudo apt-get update
+        sudo apt-get install -y libstdc++-4.9-dev
+        if [ ! -f $HOME/.meteor/meteor ]; then curl https://install.meteor.com | sh; fi
+        sudo ln -s $HOME/.meteor/meteor /usr/bin/meteor
+    - run:
+      name: Test
+      command: cd tests && bash run_tests.sh
+    - run:
+      name: Build
+      command: |
+        docker images
+        docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
         IMAGES="
           base
         "

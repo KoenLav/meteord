@@ -30,7 +30,7 @@ jobs:
           name: Build
           command: |
             docker images
-            docker -u $DOCKER_USER -p $DOCKER_PASS
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
             IMAGES="
               base
             "

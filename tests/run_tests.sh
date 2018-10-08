@@ -2,10 +2,6 @@
 set -e
 set -x
 
-export NODE_VERSION=${NODE_VERSION:-8.12.0}
-
-bash ./build_it.sh
-
 bash ./test_meteor_app.sh
 #bash ./test_meteor_app_with_devbuild.sh
 

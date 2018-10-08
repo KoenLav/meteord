@@ -57,3 +57,4 @@ jobs:
               docker tag "${DOCKER_HUB_REPO}:base" "${DOCKER_HUB_REPO}:latest"
               docker push "${DOCKER_HUB_REPO}:latest"
             fi
+            

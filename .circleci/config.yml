@@ -56,4 +56,5 @@ workflows:
     jobs:
       - build:
           filters:
-            branch: /^node-[0-9.]+$/
+            branches: 
+              only: /^node-[0-9.]+$/

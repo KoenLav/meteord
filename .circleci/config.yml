@@ -12,7 +12,7 @@ jobs:
           command: curl https://install.meteor.com | sh
       - run:
           name: Build
-          command: bash tests/build_it.sh
+          command: cd tests && bash build_it.sh
       - run:
           name: Test
           command: cd tests && bash run_tests.sh

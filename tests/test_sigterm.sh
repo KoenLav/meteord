@@ -6,7 +6,6 @@ set -x
 
 function clean() {
   docker rm -f meteor-app
-  docker rmi -f meteor-app-image
   rm -rf hello
 }
 
@@ -15,21 +14,23 @@ clean
 
 meteor create --release 1.9 hello
 cd hello
-echo "FROM koenlav/meteord:node-${NODE_VERSION}-devbuild" > Dockerfile
+echo "process.on('SIGTERM', function () { console.log('SIGTERM RECEIVED'); });" >> server/main.js
 
-docker build -t meteor-app-image ./
+meteor build --architecture=os.linux.x86_64 ./
 docker run -d \
     --name meteor-app \
     -e ROOT_URL=http://yourapp_dot_com \
+    -v /tmp/hello/:/bundle \
     -p 8080:80 \
-    meteor-app-image
+    koenlav/meteord:base
 
-sleep 5
+sleep 50
 
-appContent=`curl http://localhost:8080`
+docker stop meteor-app
+found=`docker logs meteor-app | grep -c "SIGTERM RECEIVED"`
 clean
 
-if [[ $appContent != *"yourapp_dot_com"* ]]; then
+if [[ $found != 1 ]]; then
   echo "Failed: Meteor app"
   exit 1
 fi

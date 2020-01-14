@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 set -e
 
 if [ -d /bundle ]; then
@@ -21,7 +23,7 @@ else
 fi
 
 if [[ $REBUILD_NPM_MODULES ]]; then
-  echo "=> abernix/meteord:bin-build is NOT TESTED AT ALL (and maybe not necessary???)"
+  echo "=> koenlav/meteord:bin-build is NOT TESTED AT ALL (and maybe not necessary???)"
   echo "     Since Meteor handles rebuilding binary dependencies itself now, it's not entirely"
   echo "     clear to me if this particular image is still necessary.  If you are receiving"
   echo "     this message, I highly recommend trying the :base image without the REBUILD_NPM_MODULES"
@@ -32,7 +34,7 @@ if [[ $REBUILD_NPM_MODULES ]]; then
     bash /opt/meteord/rebuild_npm_modules.sh
     cd ../../
   else
-    echo "=> Use abernix/meteord:bin-build for binary bulding."
+    echo "=> Use koenlav/meteord:bin-build for binary bulding."
     exit 1
   fi
 fi
@@ -47,4 +49,4 @@ fi
 export PORT=${PORT:-80}
 
 echo "=> Starting meteor app on port:$PORT"
-node main.js
+exec node ${METEORD_NODE_OPTIONS} main.js
